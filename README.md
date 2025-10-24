@@ -52,6 +52,12 @@ Afterward, I created the table using the parameters below:
 ## Step 9: API
 Setting up the Functions App was straightforward. I chose the lowest option for consumption and set the code to "python".
 
+It was on attempting to set up my Azure App for the API that I discovered I can only create functions through a code enviornment:
+[![image.png](https://i.postimg.cc/ryjLQ9M3/image.png)](https://postimg.cc/G94NpGBx)
+
+### Side Quest! Learning how to use Git and Azure with VSCode
+I am pretty new to Git, Azure and VSCode, so this one was fun. I knew that this project would eventually lead me to using Git and VSCode together, so I figured this is as good a time as any to get familiar with both while I also get set up with Azure Functions. 
+
 ## Step 10: Python
 
 ## Step 11: Tests
