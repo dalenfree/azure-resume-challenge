@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name - Resume</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Your Name</h1>
+      <p>📧 email@example.com · 🌐 yourwebsite.com · 📍 City, Country</p>
+    </header>
+
+    <section>
+      <h2>Professional Summary</h2>
+      <p>
+        A concise summary of your career and strengths in 2–3 sentences.
+      </p>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      <div class="item">
+        <h3>Job Title — Company</h3>
+        <div class="meta">Jan 2020 – Present | City</div>
+        <ul>
+          <li>Responsibility or achievement 1</li>
+          <li>Responsibility or achievement 2</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="item">
+        <h3>Degree — University</h3>
+        <div class="meta">2015 – 2019 | Location</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <div class="skills-list">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>Python</span>
+        <span>Git</span>
+      </div>
+    </section>
+  </div>
+  <head>
+  <meta charset="UTF-8">
+  <title>Visitor Counter</title>
+  <style>
+    #counter {
+      font-family: Arial, sans-serif;
+      font-size: 1.2em;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <p>You are visitor number: <span id="counter">Loading...</span></p>
+
+  <script>
+    const functionUrl = "https://YOUR_FUNCTION_APP.azurewebsites.net/api/VisitorCounter"; // Replace this
+
+    async function updateVisitorCount() {
+      try {
+        const response = await fetch(functionUrl);
+        const data = await response.json();
+        document.getElementById("counter").textContent = data.count;
+      } catch (error) {
+        console.error("Error fetching visitor count:", error);
+        document.getElementById("counter").textContent = "N/A";
+      }
+    }
+
+    updateVisitorCount();
+  </script>
+</body>
+</html>
