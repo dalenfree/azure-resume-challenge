@@ -58,6 +58,9 @@ It was on attempting to set up my Azure App for the API that I discovered I can 
 ### Side Quest! Learning how to use Git and Azure with VSCode
 I am pretty new to Git, Azure and VSCode, so this one was fun. I knew that this project would eventually lead me to using Git and VSCode together, so I figured this is as good a time as any to get familiar with both while I also get set up with Azure Functions. 
 
+### Another Side Quest! Moving over to CLI
+At this point, I was feeling a little bit winded by the GUI in Azure. On my Linux machines (now and past) I learned pretty quickly that the best way to get things done efficiently is often through CLI, so I decided to dive into Azure CLI and do the coding bit in VSCode with assistance from ChatGPT and help pages.
+
 ## Step 10: Python
 
 ## Step 11: Tests
