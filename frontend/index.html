@@ -63,23 +63,9 @@
   </style>
 </head>
 <body>
-  <p>You are visitor number: <span id="counter">Loading...</span></p>
-
-  <script>
-    const functionUrl = "https://rcfa-che0dscycjh0fxar.canadacentral-01.azurewebsites.net/"; // Replace this
-
-    async function updateVisitorCount() {
-      try {
-        const response = await fetch(functionUrl);
-        const data = await response.json();
-        document.getElementById("counter").textContent = data.count;
-      } catch (error) {
-        console.error("Error fetching visitor count:", error);
-        document.getElementById("counter").textContent = "N/A";
-      }
-    }
-
-    updateVisitorCount();
-  </script>
+  <h1>Welcome!</h1>
+  <p>You are visitor number:</p>
+  <div id="visitors">loading...</div>
+  <script src="app.js"></script>
 </body>
 </html>

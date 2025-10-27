@@ -38,7 +38,29 @@ It took me a surprisingly long time to troubleshoot this step. At first I though
 >The Endpoint hostname of your Azure Front Door resource is the answer/value for the CNAME that you should direct your custom domain! Remember the TXT secret as well!
 
 ## Step 7: Javascript
-I got support form ChatGPT again for this step. I haven't really worked with Javascript before, so was unclear about how all the parts would fit together, so I asked ChatGPT for a step-by-step of how to set up the script for the counter on my website.
+This is where the real fun started! I know very little about JavaScript, Python, Databases and APIs before this project. I quickly learned that **Steps 7-15** are very interrelated and would require a good understanding of all the parts before starting in on one of them. 
+
+I got a lot of support form ChatGPT for this step. I haven't really worked with Javascript before, so was unclear about how all the parts would fit together, so I asked ChatGPT for a step-by-step of how to set up the script for the counter on my website. 
+
+I learned for this step that I would have to set some parameters for the static website to:
+1. Pull in the current visitor count from the CosmosDB Table via the Function App;
+2. Display the current visitor count on the static website;
+3. Increment the number in the visitor count upon full loading of the page; 
+4. Push back the newly incremented number to the CosmosDB Table via a Function App.
+
+### DOM Elements
+From my ChatGPT fueled curriculum, I learned that I would have to start with an understanding of how I can create "event triggers" on my static web page through DOM elements. This threw me back to the many hours I spent creating "Use Map Settings" games in *Starcraft* in my early teems - trigger events were key to making things work properly (move *x* character here, *y* event occurs). I was pleased to see that it seems Javascript can make webpages work the same way.
+
+Jumping ahead to **4** in the above list, I knew I wanted the page count number to increment by +1 when the page was fully loaded, so I was relieved to see that this action is actually an event you can create:
+
+>DOMContentLoaded
+
+I relied pretty heavily on ChatGPT to help me formulate the code I should include for this part, but the learnings were significant.
+
+## Fetching elements from the CosmosDB Table API via the Function App
+
+
+
 
 ## Step 8: Database
 I ran into an error when setting up the Cosmos DB Table API, it seems the default location was not eligble for deployment. I had to go back through the wizard an select a different location, then it worked as expected.
