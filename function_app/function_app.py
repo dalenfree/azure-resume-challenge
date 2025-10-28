@@ -13,12 +13,12 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
     logging.info("Processing HTTP request for visitor counter...")
 
     # === 1. Initialize Cosmos DB client ===
-    cosmos_url = "https://rccdbaccount.documents.azure.com:443/"
-    cosmos_key = os.getenv("COSMOS_DB_KEY")  # store your key securely in Azure configuration!
+    cosmos_url = os.getenv("COSMOS_DB_URL")  # e.g., "https://rccdbaccount.documents.azure.com:443/"
+    cosmos_key = os.getenv("COSMOS_DB_KEY")  # your primary key from Azure Cosmos DB Keys tab
 
-    if not cosmos_key:
+    if not cosmos_url or not cosmos_key:
         return func.HttpResponse(
-            json.dumps({"error": "Missing Cosmos DB key in environment variables."}),
+            json.dumps({"error": "Missing Cosmos DB URL or key in environment variables."}),
             status_code=500,
             mimetype="application/json"
         )
@@ -26,8 +26,8 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
     client = CosmosClient(cosmos_url, credential=cosmos_key)
 
     # === 2. Select database and container ===
-    database_name = "TablesDB"  
-    container_name = "VisitorCount"
+    database_name = "Counter"      # your Cosmos DB database name
+    container_name = "Visitors"     # your container name
 
     try:
         database = client.get_database_client(database_name)
@@ -39,14 +39,13 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json"
         )
 
-    # === 3. Define keys ===
-    partition_key = "counter"
-    item_id = "visitors"
+    # === 3. Define item id ===
+    item_id = "1"   # based on your current NoSQL document { "id": "1", "count": 1 }
 
     # === 4. Handle GET requests ===
     if req.method == "GET":
         try:
-            item = container.read_item(item=item_id, partition_key=partition_key)
+            item = container.read_item(item=item_id, partition_key=item_id)
             count = item.get("count", 0)
             return func.HttpResponse(
                 json.dumps({"count": count}),
@@ -59,15 +58,18 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
                 mimetype="application/json"
             )
 
-    # === 5. Handle POST requests ===
+    # === 5. Handle POST requests (increment count) ===
     elif req.method == "POST":
         try:
-            item = container.read_item(item=item_id, partition_key=partition_key)
+            item = container.read_item(item=item_id, partition_key=item_id)
             item["count"] = item.get("count", 0) + 1
             container.replace_item(item=item_id, body=item)
 
             return func.HttpResponse(
-                json.dumps({"message": "Visitor count incremented", "new_count": item["count"]}),
+                json.dumps({
+                    "message": "Visitor count incremented",
+                    "new_count": item["count"]
+                }),
                 mimetype="application/json",
                 status_code=200
             )
@@ -75,12 +77,14 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
             # If the record doesn't exist, create it
             new_item = {
                 "id": item_id,
-                "counter": partition_key,
                 "count": 1
             }
             container.create_item(body=new_item)
             return func.HttpResponse(
-                json.dumps({"message": "Visitor record created", "new_count": 1}),
+                json.dumps({
+                    "message": "Visitor record created",
+                    "new_count": 1
+                }),
                 mimetype="application/json",
                 status_code=201
             )
