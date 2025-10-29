@@ -43,24 +43,17 @@ This is where the real fun started! I know very little about JavaScript, Python,
 I got a lot of support form ChatGPT for this step. I haven't really worked with Javascript before, so was unclear about how all the parts would fit together, so I asked ChatGPT for a step-by-step of how to set up the script for the counter on my website. 
 
 I learned for this step that I would have to set some parameters for the static website to:
-1. Pull in the current visitor count from the CosmosDB Table via the Function App;
-2. Display the current visitor count on the static website;
-3. Increment the number in the visitor count upon full loading of the page; 
-4. Push back the newly incremented number to the CosmosDB Table via a Function App.
+1. Push an incremented number to CosmosDB via the Function App; 
+2. Display the incremented visitor count number on the static website.
 
 ### DOM Elements
 From my ChatGPT fueled curriculum, I learned that I would have to start with an understanding of how I can create "event triggers" on my static web page through DOM elements. This threw me back to the many hours I spent creating "Use Map Settings" games in *Starcraft* in my early teems - trigger events were key to making things work properly (move *x* character here, *y* event occurs). I was pleased to see that it seems Javascript can make webpages work the same way.
 
-Jumping ahead to **4** in the above list, I knew I wanted the page count number to increment by +1 when the page was fully loaded, so I was relieved to see that this action is actually an event you can create:
+Jumping ahead to **4** in the above list, I knew I wanted the page count number to increment by +1 when the page was fully loaded, so I was relieved to see that this action is actually a fully supported event you can create:
 
 >DOMContentLoaded
 
 I relied pretty heavily on ChatGPT to help me formulate the code I should include for this part, but the learnings were significant.
-
-## Fetching elements from the CosmosDB Table API via the Function App
-
-
-
 
 ## Step 8: Database
 I ran into an error when setting up the Cosmos DB Table API, it seems the default location was not eligble for deployment. I had to go back through the wizard an select a different location, then it worked as expected.
@@ -70,6 +63,8 @@ Afterward, I created the table using the parameters below:
 | ------------ | -------- | --------------- |
 | counter      | visitors | (integer count) |
 
+## Moving from Cosmos DB Table API to NoSQL
+I was having a rough time getting the Table API to show up properly in my local set up. This could have been due to CORS requirements, which I later addressed, but I was generally not pleased with the lack of flexibility of the Table API. In my frustration I set up the database again using the NoSQL option. I found it easier to manage, and easy to manually tweak if needed - there were also lots of tutorials online showing how to effectively use it.
 
 ## Step 9: API
 Setting up the Functions App was straightforward. I chose the lowest option for consumption and set the code to "python".
@@ -80,14 +75,24 @@ It was on attempting to set up my Azure App for the API that I discovered I can 
 ### Side Quest! Learning how to use Git and Azure with VSCode
 I am pretty new to Git, Azure and VSCode, so this one was fun. I knew that this project would eventually lead me to using Git and VSCode together, so I figured this is as good a time as any to get familiar with both while I also get set up with Azure Functions. 
 
-### Another Side Quest! Moving over to CLI
-At this point, I was feeling a little bit winded by the GUI in Azure. On my Linux machines (now and past) I learned pretty quickly that the best way to get things done efficiently is often through CLI, so I decided to dive into Azure CLI and do the coding bit in VSCode with assistance from ChatGPT and help pages.
-
 ## Step 10: Python
+This is the "actually make the function app" part, and was probably the most challenging of all the steps for me. I knew that the function app had to show the contents of CosmosDB in response to an http call in such a way that the JavaScript for the Static Website could display it as HTML. I knew that the app itself would have to:
+1. Access CosmosDB;
+2. Find the right database and container;
+3. Identify which item I want to see;
+4. Make the http page show data (I learned this is done through "GET" requests);
+5. Make the http page add/overwrite data (I learned this is done through "POST" requests);
+6. Throw an error if it gets a request it doesn't recognize.
+
+I spent a few days working through each of these steps and ended up with the code below. It's likely not near optimized, but, in conjunction with the JavaScript on the frontend, it works!
+
+### Side Quest! Moving over to CLI
+At this point, I was feeling a little bit winded by the GUI in Azure. On my Linux machines (now and past) I learned pretty quickly that the best way to get things done efficiently is often through CLI, so I decided to dive into Azure CLI and do the coding bit in VSCode with assistance from ChatGPT and help pages. I also found that deploying the Function App via VSCode seemed to hang indefinitely (perhaps because I am on Debian), so I deployed the Function App code by using Azure CLI, which went pretty smoothly.
 
 ## Step 11: Tests
 
 ## Step 12: Infrastructure as a Code
+Github makes it pretty easy to make YAML files.
 
 ## Step 13: Source Control
 

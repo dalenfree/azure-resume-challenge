@@ -40,7 +40,7 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     # === 3. Define item id ===
-    item_id = "1"   # based on your current NoSQL document { "id": "1", "count": 1 }
+    item_id = "1" 
 
     # === 4. Handle GET requests ===
     if req.method == "GET":
@@ -66,10 +66,7 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
             container.replace_item(item=item_id, body=item)
 
             return func.HttpResponse(
-                json.dumps({
-                    "message": "Visitor count incremented",
-                    "new_count": item["count"]
-                }),
+                json.dumps({item["count"]}),
                 mimetype="application/json",
                 status_code=200
             )
