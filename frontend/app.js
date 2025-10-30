@@ -21,12 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Fetch the JSON result
             const jsonResponse = await postResponse.json();
 
-            // Show only the number in the div
-            visitorsDiv.textContent = jsonResponse.new_count;
-
+            // Display the new_count in the visitors div
+            visitorsDiv.innerText = `Visitor count incremented. New count: ${jsonResponse.new_count}`;
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
-            visitorsDiv.textContent = 'Error';
+            visitorsDiv.innerText = 'Error incrementing visitor count.';
         }
     };
 
