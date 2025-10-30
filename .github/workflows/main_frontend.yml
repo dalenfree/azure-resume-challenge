@@ -32,10 +32,7 @@ jobs:
       uses: azure/CLI@v1
       with:
         inlineScript: |
-          az network front-door purge-endpoint \
-            --name "rcfd/rcfdendpoint" \
-            --resource-group "Resource_Group_1" \
-            --content-paths "/*"
+          az afd endpoint purge --endpoint-name rcfdendpoint --profile-name rcfd --resource-group Resource_Group_1 --content-paths "/*""
 
         #  - name: Purge CDN endpoint
    #   uses: azure/CLI@v1
