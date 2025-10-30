@@ -1,8 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-# More info on Python, GitHub Actions, and Azure Functions: https://aka.ms/python-webapps-actions
-
-name: Build and deploy Python project to Azure Function App - rcfa
+name: Build and Deploy Python Azure Function App - rcfa
 
 on:
   push:
@@ -13,25 +9,26 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: counter_function_app # set this to the path to your web app project, defaults to the repository root
-  PYTHON_VERSION: '3.11' # set this to the python version to use (supports 3.6, 3.7, 3.8)
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: counter_function_app
+  PYTHON_VERSION: '3.11'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read #This is required for actions/checkout
+      contents: read
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python version
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Create and start virtual environment
+      - name: Create and activate virtual environment
+        working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
         run: |
           python -m venv venv
           source venv/bin/activate
@@ -41,25 +38,26 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      # Optional: Add step to run tests here
+      # Optional: Add tests here
+      # - name: Run tests
+      #   run: pytest
 
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+      - name: Zip deployment package
+        working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+        run: zip -r ../release.zip .
 
-      - name: Upload artifact for deployment job
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: |
-            release.zip
-            !venv/
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     permissions:
-      id-token: write #This is required for requesting the JWT
-      contents: read #This is required for actions/checkout
+      id-token: write
+      contents: read
 
     steps:
       - name: Download artifact from build job
@@ -67,22 +65,15 @@ jobs:
         with:
           name: python-app
 
-      - name: Unzip artifact for deployment
-        run: |
-          unzip release.zip
-          rm release.zip
-        
-      - name: Login to Azure
+      - name: Login to Azure using OIDC
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_00E1924E809F4ACE9BBCD5D4F64F7A56 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_2E08E96FBA6D4B7BA425E9170879CFF9 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_C7162927FAAF4DDF84E1C24B0B004AB2 }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: 'Deploy to Azure Function App'
+      - name: Deploy to Azure Function App
         uses: azure/functions-action@v2
         with:
-          app-name: 'rcfa'
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-
-          
+          app-name: 'rcfa'              # Your Azure Function App name
+          package: 'release.zip'        # Path to the built zip package
