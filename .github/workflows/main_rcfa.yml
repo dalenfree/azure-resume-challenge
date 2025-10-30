@@ -63,9 +63,11 @@ jobs:
 
       # 🔐 Login to Azure using OIDC federated credentials
       - name: Login to Azure
-        uses: Azure/login@v1
+        uses: azure/login@v2
         with:
-          creds: ${{ secrets.AZURE_RBAC_CREDENTIALS }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       # 🚀 Deploy to Azure Function App
       - name: Deploy to Azure Function App
