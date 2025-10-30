@@ -27,11 +27,20 @@ jobs:
       with:
         inlineScript: |
             az storage blob upload-batch --overwrite --account-name resumechallenge1 --auth-mode key -d '$web' -s frontend/
-    - name: Purge CDN endpoint
+    - name: Purge Front Door cache
       uses: azure/CLI@v1
       with:
         inlineScript: |
-           az cdn endpoint purge --content-paths  "/*" --profile-name "rcfd" --name "rcfd" --resource-group "Resource_Group_1"
+          az network front-door purge-endpoint \
+            --name "rcfd" \
+            --resource-group "Resource_Group_1" \
+            --content-paths "/*"
+
+        #  - name: Purge CDN endpoint
+   #   uses: azure/CLI@v1
+    #  with:
+     #   inlineScript: |
+      #     az cdn endpoint purge --content-paths  "/*" --profile-name "rcfd" --name "rcfd" --resource-group "Resource_Group_1"
 
   # Azure logout
     - name: logout
