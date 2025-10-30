@@ -63,7 +63,7 @@ jobs:
 
       # 🔐 Login to Azure using OIDC federated credentials
       - name: Login to Azure
-        uses: azure/login@v2
+        uses: Azure/login@v1
         with:
           creds: ${{ secrets.AZURE_RBAC_CREDENTIALS }}
 
