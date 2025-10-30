@@ -79,11 +79,10 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_2E08E96FBA6D4B7BA425E9170879CFF9 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_C7162927FAAF4DDF84E1C24B0B004AB2 }}
 
-      - name: 'Deploy to Azure Functions'
-        uses: Azure/functions-action@v1
-        id: deploy-to-function
+      - name: 'Deploy to Azure Function App'
+        uses: azure/functions-action@v2
         with:
           app-name: 'rcfa'
-          slot-name: 'Production'
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+
           
