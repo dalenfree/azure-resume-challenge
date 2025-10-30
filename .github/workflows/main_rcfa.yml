@@ -1,6 +1,7 @@
 name: Build and Deploy Python Azure Function App - rcfa
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -66,14 +67,14 @@ jobs:
           name: python-app
 
       - name: Login to Azure using OIDC
-        uses: azure/login@v2
+        uses: Azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Deploy to Azure Function App
-        uses: azure/functions-action@v2
+        uses: Azure/functions-action@v1
         with:
           app-name: 'rcfa'              # Your Azure Function App name
           package: 'release.zip'        # Path to the built zip package
