@@ -1,7 +1,6 @@
 name: Build and Deploy Python Azure Function App - rcfa
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
