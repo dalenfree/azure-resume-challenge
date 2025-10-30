@@ -33,7 +33,7 @@ jobs:
       with:
         inlineScript: |
           az network front-door purge-endpoint \
-            --name "rcfd" \
+            --name "rcfdendpoint" \
             --resource-group "Resource_Group_1" \
             --content-paths "/*"
 
