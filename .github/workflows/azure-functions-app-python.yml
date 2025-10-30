@@ -21,6 +21,8 @@ name: Deploy Python project to Azure Function App
 on:
   push:
     branches: ["main"]
+    paths:
+      - 'counter_function_app/**'
 
 env:
   AZURE_FUNCTIONAPP_NAME: 'rcfa'   # set this to your function app name on Azure
