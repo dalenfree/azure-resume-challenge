@@ -8,6 +8,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'counter_function_app/**'
   workflow_dispatch:
 
 env:
