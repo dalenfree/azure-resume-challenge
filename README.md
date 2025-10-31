@@ -121,6 +121,3 @@ Same idea as above, except this time, instead of packing a .zip file and uploadi
 ## Step 16: Blog Post
 Does this count? I have some thoughts to share about some of the steps that people new to Azure may find helpful - I'll try to flesh them out and add them to some blog sites, maybe hashnode.
 
-## Thoughts and Next Steps
-I've gotta say, this project really sparked my interest in the cloud.
-
