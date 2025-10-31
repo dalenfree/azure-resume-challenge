@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'counter_function_app/**'
+      - 'counter_function_app/**' # VERY IMPORTANT if you don't include this, it will deploy on any change to the repo
   workflow_dispatch:
 
 env:
@@ -34,9 +34,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt --target=".python_packages/lib/site-packages"
 
-      # Optional: Run tests
-      # - name: Run tests
-      #   run: pytest
+      - name: Run tests
+        working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+        run: |
+          pytest --maxfail=1 --disable-warnings -q
 
       - name: Zip deployment package
         working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}

@@ -80,9 +80,9 @@ This is the "actually make the function app" part, and was probably the most cha
 1. Access CosmosDB;
 2. Find the right database and container;
 3. Identify which item I want to see;
-4. Make the http page show data (I learned this is done through "GET" requests);
-5. Make the http page add/overwrite data (I learned this is done through "POST" requests);
-6. Throw an error if it gets a request it doesn't recognize.
+4. Allow the Javascript on the frontend to make an http POST request to trigger count increments;
+5. Allow the Javascript on the frontend to make an http GET request to pull the data from CosmosDB via the API/Function App in order for the new count to be displayed in the html;
+6. Throw an error if it something went wrong.
 
 I spent a few days working through each of these steps and ended up with the code below. It's likely not near optimized, but, in conjunction with the JavaScript on the frontend, it works!
 
@@ -90,18 +90,37 @@ I spent a few days working through each of these steps and ended up with the cod
 At this point, I was feeling a little bit winded by the GUI in Azure. On my Linux machines (now and past) I learned pretty quickly that the best way to get things done efficiently is often through CLI, so I decided to dive into Azure CLI and do the coding bit in VSCode with assistance from ChatGPT and help pages. I also found that deploying the Function App via VSCode seemed to hang indefinitely (perhaps because I am on Debian), so I deployed the Function App code by using Azure CLI, which went pretty smoothly.
 
 ## Step 11: Tests
+I had to learn more python here, specifically **mocking** and **patching**. I admittedly had a great deal of help from ChatGPT for this one.
 
 ## Step 12: Infrastructure as a Code
-Github makes it pretty easy to make YAML files.
+It was after setting up all the above that the importance of templated deployments dawned on me. While I do like that Azure has the option of generating JSON ARM Templates, I feel like it will be more applicable to broader usage to learn something like Terraform instead.
 
 ## Step 13: Source Control
+From about **Step 9** onward, I found I pretty much needed to work in an IDE or Github directly in order to properly upload my files/code to Azure. I found that working in VScode and then committing to Github is a generally smooth way to do Source Control. VScode makes it dead simple to push to Github and the interface looks nice. I tried to see what it would be like to deploy to Azure directly from VScode, but found it unreliable (and unbearably slow) - perhaps because I'm running VScode on Debian.
 
 ## Step 14: CI/CD (Back end)
+*Oh my goodness* it felt good to get to this step. It took some troubleshooting, but I eventually got it all working. I learned a lot about the structure of yml files. For this one, I found Github's documentation to be better than Azure's. 
+
+I noticed that the biggest issue was the automated login procedure via Azure CLI that was baked into the yml workflow. As a part of this step, I went with the recommended steps [here](https://docs.github.com/en/actions/how-tos/secure-your-work/security-harden-deployments/oidc-in-azure):
+1. Create an Entra ID application and service principal for Github (this amounts to Github being a contributor to your Azure account);
+2. Add federated credentials for the Entra ID application (set up login information that your Github workflows can use in an automated way during deployment);
+3. Create Github secrets for storing the Azure configuration
+
+>[!TIP] 
+> Remember to specify on -> push -> path if you have everything in one repository like I do! I had something like 20+ unsuccessful commits before figuring this out... 
 
 ## Step 15: CI/CD (Front end)
+Same idea as above, except this time, instead of packing a .zip file and uploading to my Azure Function app, I set up a workflow to upload to blob storage. [Azure's docs](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-static-site-github-actions?tabs=openid) won here! I pretty much followed the instructions step-by-step. I discovered that actually finding the information for the variables was the toughest part here.
+
+>[!TIP]
+> Keep a running list of what you named everything to make your life easier. I spent an hour trying to find my Front Door endpoint name. Don't be like me.
+
+>[!TIP]
+> In your yml for uploading to blob storage, I *highly* recommend adding a --nowait parameter to your endpoint purge az cli command. For some reason the purge command hangs for a very long time for me (30+ minutes).
 
 ## Step 16: Blog Post
+Does this count? I have some thoughts to share about some of the steps that people new to Azure may find helpful - I'll try to flesh them out and add them to some blog sites, maybe hashnode.
 
 ## Thoughts and Next Steps
-All this is well and dandy, but I'm not sure I like being held down to one cloud provider. So, for my next project, I'd like to transfer the project above into Terraform and try to deploy it into another provider, probably AWS.
+I've gotta say, this project really sparked my interest in the cloud.
 

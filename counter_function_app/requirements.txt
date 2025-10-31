@@ -3,4 +3,5 @@ azure-identity
 azure-data-tables
 azure-core
 azure-cosmos
+pytest
 
