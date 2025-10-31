@@ -38,8 +38,10 @@ jobs:
 
       - name: Run tests
         working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: |
-          pytest --maxfail=1 --disable-warnings -q
+          python -m pytest --maxfail=1 --disable-warnings -q
 
       - name: Zip deployment package
         working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
