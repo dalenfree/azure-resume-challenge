@@ -5,6 +5,18 @@ import azure.functions as func
 from counter_function_app import function_app as main
 
 
+@pytest.fixture(autouse=True)
+def mock_env_vars(monkeypatch, request):
+    """Automatically set environment variables unless test disables it."""
+    if "no_env" in request.keywords:
+        return  # skip env setup for this test
+
+    monkeypatch.setenv("COSMOS_DB_URL", "mock_url")
+    monkeypatch.setenv("COSMOS_DB_KEY", "mock_key")
+    monkeypatch.setenv("COSMOS_DB_NAME", "mock_db")
+    monkeypatch.setenv("COSMOS_DB_CONTAINER", "mock_container")
+
+
 @pytest.fixture
 def mock_req_get():
     """Mock GET request."""
@@ -73,13 +85,14 @@ def test_post_request_increments_count(mock_cosmos, mock_req_post):
     mock_container.replace_item.assert_called_once()
 
 
+@pytest.mark.no_env
 @patch("counter_function_app.function_app.CosmosClient")
 def test_missing_env_vars_returns_500(mock_cosmos, mock_req_get, monkeypatch):
     """Test when environment variables are missing."""
-    monkeypatch.delenv("COSMOS_DB_URL", raising=False)
-    monkeypatch.delenv("COSMOS_DB_KEY", raising=False)
-
+    # All env vars are skipped because of @pytest.mark.no_env
     response = main.http_trigger(mock_req_get)
+
     assert response.status_code == 500
     data = json.loads(response.get_body())
     assert "Missing Cosmos DB URL or key" in data["error"]
+
