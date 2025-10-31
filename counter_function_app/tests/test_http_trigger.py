@@ -32,7 +32,7 @@ def make_mock_container(count=1):
     return mock_container
 
 
-@patch("counter_function_app.main.CosmosClient")
+@patch("counter_function_app.function_app.CosmosClient")
 def test_get_request_returns_count(mock_cosmos, mock_req_get):
     """Test GET request returns count from mocked Cosmos DB."""
     mock_client = MagicMock()
@@ -53,7 +53,7 @@ def test_get_request_returns_count(mock_cosmos, mock_req_get):
     assert data["count"] == 5
 
 
-@patch("counter_function_app.main.CosmosClient")
+@patch("counter_function_app.function_app.CosmosClient")
 def test_post_request_increments_count(mock_cosmos, mock_req_post):
     """Test POST request increments visitor count."""
     mock_client = MagicMock()
@@ -73,7 +73,7 @@ def test_post_request_increments_count(mock_cosmos, mock_req_post):
     mock_container.replace_item.assert_called_once()
 
 
-@patch("counter_function_app.main.CosmosClient")
+@patch("counter_function_app.function_app.CosmosClient")
 def test_missing_env_vars_returns_500(mock_cosmos, mock_req_get, monkeypatch):
     """Test when environment variables are missing."""
     monkeypatch.delenv("COSMOS_DB_URL", raising=False)
