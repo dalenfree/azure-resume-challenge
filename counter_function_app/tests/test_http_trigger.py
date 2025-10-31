@@ -2,7 +2,7 @@ import json
 import pytest
 from unittest.mock import patch, MagicMock
 import azure.functions as func
-import main  # adjust if your file name is different
+import function_app  
 
 
 @pytest.fixture
