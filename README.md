@@ -1,5 +1,5 @@
 # The Cloud Resume Challenge, or How I Stumbled Through Azure for a Month
-A great deal of digital ink has been spilled already about the [Cloud Resume Challenge](https://cloudresumechallenge.dev/docs/the-challenge/azure/) (hereafter "The Challenge"). This writeup will serve as a bit of a journal for my adventure!
+A great deal of digital ink has been spilled already about the [Cloud Resume Challenge](https://cloudresumechallenge.dev/docs/the-challenge/azure/). This writeup will serve as a bit of a journal for my adventure!
 
 ## A little about me
 I come from a *recreationally technical* background - I've dabbled in Linux since being a teenager, have always found working in the command line "neat", and I've always been the family go-to for tech-related questions. In my recent professional roles (in tech sales), I have come progressively closer and closer to the development side of things and, most recently, the wonderful world of RFPs, risk assessments, controls, etc. I've slowly had to become more conversant in cloud-related parlance, so, I thought, why not try jumping in to see how much I can learn. 
@@ -17,10 +17,10 @@ In preparation for the exam, I did a great deal of practice tests on the Microso
 Ok, so, I kind of cheated here and in **Step 3**. I have brushed up against HTML and CSS before in a previous role and also when putting together the website for my wife's business, but ChatGPT did play a big role here for this project - not only as a time saver but also as a learning tool.
 
 >[!TIP] 
->If you are not a front-end developer (I am not), I enthusiastically recommend using generative AI to help with this part of the challenge. I had a clean HTML and CSS resume template in seconds, but the exercise of revising/customizing it served as a great learning experience.
+>If you are not a front-end developer (I am not), I enthusiastically recommend using generative AI to help with this part of the challenge. There are also loads of free HTML/CSS templates out there as well that can get the job done as well.
 
 ## Step 3: CSS
-Pretty much the same as Step 2.
+Pretty much the same as **Step 2**.
 
 ## Step 4: Static Website
 Setting up the static website was dead simple. Just uploaded my index.html and style.css to the blob. 
@@ -29,10 +29,13 @@ Setting up the static website was dead simple. Just uploaded my index.html and s
 >Make sure the title of your html file matches the value you put in the **Static Website** blade of the blob resource. Took me a couple tries to get that right...
 
 ## Step 5: HTTPS
-This is where things started to get dicey for me. I discovered that the Azure free trial I was on did not support the use of **Azure Front Door**, which is necessary for configuring HTTPS, so I went on a tangent learning expereince spelunking the subscription options. *However* I later remembered that Azure gave a $200 credit for the first 30 days of my new account, so I used the credits to activate Front Door. It seems this option is not particularly sustainable in the long term (~$50 CDN/month!), so I decided to work within the 30 day time frame and shut down the project upon completion, lest I incur unneccesary costs. 
+This is where things started to get fun. The documentation on the *Cloud Resume Challenge* site pointed toward using **Azure CDN**, but it seems that is not available any longer, and that **Azure Front Door** is the only option available for linking a custom domain with the correct certificates for HTTPS. 
+
+I discovered that the Azure free trial I was on did not support the use of **Azure Front Door**, which is necessary for configuring HTTPS, so I went on a tangent learning expereince spelunking the subscription options. *However* I later remembered that Azure gave a $200 credit for the first 30 days of my new account, so I used the credits to activate Front Door. It seems this option is not particularly sustainable in the long term (~$50 CDN/month!), so I decided to work within the 30 day time frame and shut down the project upon completion, lest I incur unneccesary costs.
+
 
 ## Step 6: DNS
-It took me a surprisingly long time to troubleshoot this step. At first I thought it would be sufficient to use the Endpoint hostname from the Static Website, but I later discovered that using the Endpoint hostname of the Azure Front Door resource is actually the way to do it (in retrospect, seems pretty obvious). I use Porkbun, and it was pretty easy to configure once I knew which CNAME I had to use.
+It took me a surprisingly long time to troubleshoot this step. At first I thought it would be sufficient to point my custom domain to the Endpoint hostname from the Static Website, but I later discovered that using the Endpoint hostname of the Azure Front Door resource is actually the way to do it (in retrospect, seems pretty obvious). I use Porkbun, and it was pretty easy to configure once I knew which CNAME I had to use.
 
 >[!TIP]
 >The Endpoint hostname of your Azure Front Door resource is the answer/value for the CNAME that you should direct your custom domain! Remember the TXT secret as well!
@@ -49,7 +52,7 @@ I learned for this step that I would have to set some parameters for the static 
 ### DOM Elements
 From my ChatGPT fueled curriculum, I learned that I would have to start with an understanding of how I can create "event triggers" on my static web page through DOM elements. This threw me back to the many hours I spent creating "Use Map Settings" games in *Starcraft* in my early teems - trigger events were key to making things work properly (move *x* character here, *y* event occurs). I was pleased to see that it seems Javascript can make webpages work the same way.
 
-Jumping ahead to **4** in the above list, I knew I wanted the page count number to increment by +1 when the page was fully loaded, so I was relieved to see that this action is actually a fully supported event you can create:
+I knew I wanted the page count number to increment by +1 when the page was fully loaded, so I was relieved to see that this action is actually a fully supported event you can create:
 
 >DOMContentLoaded
 
@@ -84,7 +87,7 @@ This is the "actually make the function app" part, and was probably the most cha
 5. Allow the Javascript on the frontend to make an http GET request to pull the data from CosmosDB via the API/Function App in order for the new count to be displayed in the html;
 6. Throw an error if it something went wrong.
 
-I spent a few days working through each of these steps and ended up with the code below. It's likely not near optimized, but, in conjunction with the JavaScript on the frontend, it works!
+I spent a few days working through each of these steps and ended up with some code that seems to get the job done. It's likely not near optimized, but, in conjunction with the JavaScript on the frontend, it works!
 
 ### Side Quest! Moving over to CLI
 At this point, I was feeling a little bit winded by the GUI in Azure. On my Linux machines (now and past) I learned pretty quickly that the best way to get things done efficiently is often through CLI, so I decided to dive into Azure CLI and do the coding bit in VSCode with assistance from ChatGPT and help pages. I also found that deploying the Function App via VSCode seemed to hang indefinitely (perhaps because I am on Debian), so I deployed the Function App code by using Azure CLI, which went pretty smoothly.
