@@ -98,6 +98,8 @@ I had to learn more python here, specifically **mocking** and **patching**. I ad
 ## Step 12: Infrastructure as a Code
 It was after setting up all the above that the importance of templated deployments dawned on me. While I do like that Azure has the option of generating JSON ARM Templates, I feel like it will be more applicable to broader usage to learn something like Terraform instead.
 
+Update: OK! I initially completed this challenge without any IaC component, but, in the spirit of learning, I wanted to work toward further automating the process and cleaning up my code a bit more. I thought it would be a good idea to start with a Microsoft-native IaC so I chose ARM Templates. After a day or two I found the VS Code plugin for ARM Templates had been depreciated so I switched to Bicep instead. My Bicep project can be found [here](https://github.com/dalenfree/azure-resume-challenge-bicep/).  
+
 ## Step 13: Source Control
 From about **Step 9** onward, I found I pretty much needed to work in an IDE or Github directly in order to properly upload my files/code to Azure. I found that working in VScode and then committing to Github is a generally smooth way to do Source Control. VScode makes it dead simple to push to Github and the interface looks nice. I tried to see what it would be like to deploy to Azure directly from VScode, but found it unreliable (and unbearably slow) - perhaps because I'm running VScode on Debian.
 
