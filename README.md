@@ -1,126 +1,85 @@
-# The Cloud Resume Challenge, or How I Stumbled Through Azure for a Month
-A great deal of digital ink has been spilled already about the [Cloud Resume Challenge](https://cloudresumechallenge.dev/docs/the-challenge/azure/). This writeup will serve as a bit of a journal for my adventure!
+# The Cloud Resume Challenge: My One-Month Journey Through Azure
 
-## A little about me
-I come from a *recreationally technical* background - I've dabbled in Linux since being a teenager, have always found working in the command line "neat", and I've always been the family go-to for tech-related questions. In my recent professional roles (in tech sales), I have come progressively closer and closer to the development side of things and, most recently, the wonderful world of RFPs, risk assessments, controls, etc. I've slowly had to become more conversant in cloud-related parlance, so, I thought, why not try jumping in to see how much I can learn. 
+[![Azure](https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://azure.microsoft.com/)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/)
+[![VSCode](https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)](https://code.visualstudio.com/)
+[![Terraform](https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![Bicep](https://img.shields.io/badge/Bicep-0052CC?style=for-the-badge&logo=microsoft&logoColor=white)](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 
-I hope my story, whatever comes of it, can serve as a source of learning (or cautionary tale?) for anyone trying to move into a more "technical" space - whether for a hobby or professionally.
+Much has been written about the [Cloud Resume Challenge](https://cloudresumechallenge.dev/docs/the-challenge/azure/). This writeup serves as a journal of my one-month journey exploring Azure. My goal was to transition from tech sales into a more technical, cloud-focused role, and this project provided immersive, hands-on experience.
 
-Here goes!
+---
 
-## Step 1: AZ-900 Certification
-This step was pretty straightforward. I am lucky to have access to some great digital resources through my library, specifically O'Reilly Learning, which granted me access to Jim Cheshire's course on the certification. 
+## Skills Highlight
 
-In preparation for the exam, I did a great deal of practice tests on the Microsoft website. I booked my exam when I was consistentlt getting 90%+ on the practice tests. When I sat the exam, I was surprised to see that the format of many of the questions were quite different from the practice tests, and some of the content threw me for a bit of a curveball, but I still passed with an 857. If I can do it, you certainly can too.
+**Cloud & Infrastructure:** Azure (Blob Storage, Front Door, Function Apps, Cosmos DB, DNS, SSL/TLS), Azure CLI, Infrastructure as Code (ARM Templates, Bicep)  
+**Programming & Scripting:** Python, JavaScript, HTML, CSS  
+**DevOps & CI/CD:** GitHub Actions, YAML workflows, automated deployments, source control  
+**Tools & IDEs:** VSCode, Git, ChatGPT, Porkbun domain management  
+**Testing & Automation:** Python unit testing, mocking, patching  
 
-## Step 2: HTML
-Ok, so, I kind of cheated here and in **Step 3**. I have brushed up against HTML and CSS before in a previous role and also when putting together the website for my wife's business, but ChatGPT did play a big role here for this project - not only as a time saver but also as a learning tool.
+---
 
->[!TIP] 
->If you are not a front-end developer (I am not), I enthusiastically recommend using generative AI to help with this part of the challenge. There are also loads of free HTML/CSS templates out there as well that can get the job done as well.
+## About Me
 
-## Step 3: CSS
-Pretty much the same as **Step 2**.
+I come from a *recreationally technical* background — dabbling in Linux since my teens, enjoying command-line work, and often being the family tech support. In tech sales, I gradually moved closer to the development side, including RFPs, risk assessments, and controls.  
 
-## Step 4: Static Website
-Setting up the static website was dead simple. Just uploaded my index.html and style.css to the blob. 
+This project gave me a chance to dive into cloud concepts and hands-on development. My hope is that my experience can serve as guidance (or a cautionary tale) for anyone interested in getting "into the weeds" with cloud infrastructure.
 
->[!TIP]
->Make sure the title of your html file matches the value you put in the **Static Website** blade of the blob resource. Took me a couple tries to get that right...
+---
 
-## Step 5: HTTPS
-This is where things started to get fun. The documentation on the *Cloud Resume Challenge* site pointed toward using **Azure CDN**, but it seems that is not available any longer, and that **Azure Front Door** is the only option available for linking a custom domain with the correct certificates for HTTPS. 
+## Step-by-Step Summary
 
-I discovered that the Azure free trial I was on did not support the use of **Azure Front Door**, which is necessary for configuring HTTPS, so I went on a tangent learning expereince spelunking the subscription options. *However* I later remembered that Azure gave a $200 credit for the first 30 days of my new account, so I used the credits to activate Front Door. It seems this option is not particularly sustainable in the long term (~$50 CDN/month!), so I decided to work within the 30 day time frame and shut down the project upon completion, lest I incur unneccesary costs.
+| Step | Description | Tools/Skills Learned | Notes & Side Quests |
+|------|------------|--------------------|-------------------|
+| **1. AZ-900 Certification** | Completed Microsoft AZ-900 exam to build foundational cloud knowledge. | Azure fundamentals, Microsoft learning resources, practice tests | > [!TIP] Use practice tests extensively before booking the exam. Surprises may appear on the actual test format, though. |
+| **2. HTML** | Brushed up on HTML with AI assistance. | HTML, ChatGPT | > [!TIP] AI like ChatGPT can save time and help you learn HTML structure efficiently, especially if you don't have much experience with web development. |
+| **3. CSS** | Styled static website. | CSS, responsive design, ChatGPT | Same as Step 2. Templates and AI help a lot. |
+| **4. Static Website** | Deployed `index.html` and `style.css` to Azure Blob Storage. | Azure Storage, static websites, deployment process | > [!TIP] Ensure the HTML file name matches the Static Website configuration in Azure Blob. |
+| **5. HTTPS** | Configured custom domain using Azure Front Door. | Azure Front Door, SSL/TLS, domain mapping | > [!NOTE] Azure free trial may not allow Front Door. Use a $200 credit account for short-term testing. |
+| **6. DNS** | Set up DNS records for custom domain (Porkbun). | CNAME, TXT records, DNS troubleshooting | > [!TIP] Point the CNAME to your Front Door endpoint, not the Blob Storage directly. Remember the TXT secret for verification. |
+| **7. JavaScript** | Implemented visitor counter and front-end logic. | JavaScript, DOM manipulation (`DOMContentLoaded`), API integration, ChatGPT guidance | > [!TIP] Understanding DOM events like `DOMContentLoaded` is crucial for triggering frontend logic. |
+| **8. Database** | Created Cosmos DB NoSQL database. | Cosmos DB, partition keys, JSON formatting, CORS troubleshooting | > [!NOTE] Table API may be restrictive; switching to NoSQL improved flexibility. |
+| **9. API** | Set up Azure Function App to interact with database. | Azure Functions, Python runtime, HTTP GET/POST, VSCode, Git integration | > [!TIP] Use VSCode with Git to manage Azure Function code. Direct deployment via VSCode may be slow on Linux. |
+| **10. Python** | Implemented backend logic for visitor count increments and retrieval. | Python, Cosmos DB SDK, error handling, API integration | > [!NOTE] Frontend JavaScript interacts via HTTP GET/POST. Debugging may require CLI deployment. |
+| **11. Tests** | Wrote unit tests for the Function App. | Python testing, mocking, patching, ChatGPT guidance | > [!TIP] Learn `mock` and `patch` for testing API calls and DB interactions. |
+| **12. Infrastructure as Code** | Automated deployments using ARM Templates and Bicep. | ARM Templates, Bicep, VSCode IaC plugin | > [!NOTE] Initial ARM Templates were replaced by Bicep for simplicity. Terraform can be explored later. |
+| **13. Source Control** | Managed project using Git and GitHub. | Git, GitHub, VSCode integration | > [!TIP] Commit frequently; use VSCode Git integration for smooth workflow. |
+| **14. CI/CD (Backend)** | Automated deployment of Function App. | GitHub Actions, YAML workflows, Azure CLI, Entra ID federated credentials | > [!TIP] Use Entra ID federated credentials for secure automated login. Specify `on -> push -> paths` to avoid unnecessary deployments. |
+| **15. CI/CD (Frontend)** | Automated deployment of static website to Blob Storage. | GitHub Actions, Blob Storage, workflow variables, CLI commands (`--nowait`) | > [!TIP] Keep a running list of resource names and endpoints. Add `--nowait` to avoid hanging purge commands. |
+| **16. Blog Post** | Documented learnings for personal and professional sharing. | Technical writing, cloud documentation, blog platforms | > [!TIP] Sharing your process helps others and solidifies your own understanding. |
 
+---
 
-## Step 6: DNS
-It took me a surprisingly long time to troubleshoot this step. At first I thought it would be sufficient to point my custom domain to the Endpoint hostname from the Static Website, but I later discovered that using the Endpoint hostname of the Azure Front Door resource is actually the way to do it (in retrospect, seems pretty obvious). I use Porkbun, and it was pretty easy to configure once I knew which CNAME I had to use.
+## Key Tips & Learnings
 
->[!TIP]
->The Endpoint hostname of your Azure Front Door resource is the answer/value for the CNAME that you should direct your custom domain! Remember the TXT secret as well!
+- **AI Assistance:** ChatGPT was invaluable for learning and coding guidance.  
+- **CLI Efficiency:** Azure CLI is faster and more reliable than the GUI for complex deployments.  
+- **IaC Value:** Using Bicep/ARM Templates improves repeatability and reduces manual errors.  
+- **Documentation & Organization:** Maintain a list of endpoints, variables, and resource names to save hours.  
+- **Continuous Learning:** Integrating frontend, backend, and cloud services requires patience and incremental learning.
 
-## Step 7: Javascript
-This is where the real fun started! I know very little about JavaScript, Python, Databases and APIs before this project. I quickly learned that **Steps 7-15** are very interrelated and would require a good understanding of all the parts before starting in on one of them. 
+---
 
-I got a lot of support form ChatGPT for this step. I haven't really worked with Javascript before, so was unclear about how all the parts would fit together, so I asked ChatGPT for a step-by-step of how to set up the script for the counter on my website. 
+## Reflection
 
-I learned for this step that I would have to set some parameters for the static website to:
-1. Push an incremented number to CosmosDB via the Function App; 
-2. Display the incremented visitor count number on the static website.
+This project allowed me to:  
 
-### DOM Elements
-From my ChatGPT fueled curriculum, I learned that I would have to start with an understanding of how I can create "event triggers" on my static web page through DOM elements. This threw me back to the many hours I spent creating "Use Map Settings" games in *Starcraft* in my early teems - trigger events were key to making things work properly (move *x* character here, *y* event occurs). I was pleased to see that it seems Javascript can make webpages work the same way.
+- Gain hands-on experience with Azure, Cosmos DB, and Function Apps  
+- Develop skills in Python, JavaScript, HTML/CSS, and CI/CD  
+- Deepen my knowledge of the technical aspects of the cloud, assisting me in my current role and positioning me for a career trajectory with a more cloud-oriented, technical focus   
 
-I knew I wanted the page count number to increment by +1 when the page was fully loaded, so I was relieved to see that this action is actually a fully supported event you can create:
+The Cloud Resume Challenge was a meaningful first step .
 
->DOMContentLoaded
+---
 
-I relied pretty heavily on ChatGPT to help me formulate the code I should include for this part, but the learnings were significant.
+## Next Steps
 
-## Step 8: Database
-I ran into an error when setting up the Cosmos DB Table API, it seems the default location was not eligble for deployment. I had to go back through the wizard an select a different location, then it worked as expected.
-
-Afterward, I created the table using the parameters below:
-| PartitionKey | RowKey   | Count           |
-| ------------ | -------- | --------------- |
-| counter      | visitors | (integer count) |
-
-## Moving from Cosmos DB Table API to NoSQL
-I was having a rough time getting the Table API to show up properly in my local set up. This could have been due to CORS requirements, which I later addressed, but I was generally not pleased with the lack of flexibility of the Table API. In my frustration I set up the database again using the NoSQL option. I found it easier to manage, and easy to manually tweak if needed - there were also lots of tutorials online showing how to effectively use it.
-
-## Step 9: API
-Setting up the Functions App was straightforward. I chose the lowest option for consumption and set the code to "python".
-
-It was on attempting to set up my Azure App for the API that I discovered I can only create functions through a code enviornment:
-[![image.png](https://i.postimg.cc/ryjLQ9M3/image.png)](https://postimg.cc/G94NpGBx)
-
-### Side Quest! Learning how to use Git and Azure with VSCode
-I am pretty new to Git, Azure and VSCode, so this one was fun. I knew that this project would eventually lead me to using Git and VSCode together, so I figured this is as good a time as any to get familiar with both while I also get set up with Azure Functions. 
-
-## Step 10: Python
-This is the "actually make the function app" part, and was probably the most challenging of all the steps for me. I knew that the function app had to show the contents of CosmosDB in response to an http call in such a way that the JavaScript for the Static Website could display it as HTML. I knew that the app itself would have to:
-1. Access CosmosDB;
-2. Find the right database and container;
-3. Identify which item I want to see;
-4. Allow the Javascript on the frontend to make an http POST request to trigger count increments;
-5. Allow the Javascript on the frontend to make an http GET request to pull the data from CosmosDB via the API/Function App in order for the new count to be displayed in the html;
-6. Throw an error if it something went wrong.
-
-I spent a few days working through each of these steps and ended up with some code that seems to get the job done. It's likely not near optimized, but, in conjunction with the JavaScript on the frontend, it works!
-
-### Side Quest! Moving over to CLI
-At this point, I was feeling a little bit winded by the GUI in Azure. On my Linux machines (now and past) I learned pretty quickly that the best way to get things done efficiently is often through CLI, so I decided to dive into Azure CLI and do the coding bit in VSCode with assistance from ChatGPT and help pages. I also found that deploying the Function App via VSCode seemed to hang indefinitely (perhaps because I am on Debian), so I deployed the Function App code by using Azure CLI, which went pretty smoothly.
-
-## Step 11: Tests
-I had to learn more python here, specifically **mocking** and **patching**. I admittedly had a great deal of help from ChatGPT for this one.
-
-## Step 12: Infrastructure as a Code
-It was after setting up all the above that the importance of templated deployments dawned on me. While I do like that Azure has the option of generating JSON ARM Templates, I feel like it will be more applicable to broader usage to learn something like Terraform instead.
-
-## Step 13: Source Control
-From about **Step 9** onward, I found I pretty much needed to work in an IDE or Github directly in order to properly upload my files/code to Azure. I found that working in VScode and then committing to Github is a generally smooth way to do Source Control. VScode makes it dead simple to push to Github and the interface looks nice. I tried to see what it would be like to deploy to Azure directly from VScode, but found it unreliable (and unbearably slow) - perhaps because I'm running VScode on Debian.
-
-## Step 14: CI/CD (Back end)
-*Oh my goodness* it felt good to get to this step. It took some troubleshooting, but I eventually got it all working. I learned a lot about the structure of yml files. For this one, I found Github's documentation to be better than Azure's. 
-
-I noticed that the biggest issue was the automated login procedure via Azure CLI that was baked into the yml workflow. As a part of this step, I went with the recommended steps [here](https://docs.github.com/en/actions/how-tos/secure-your-work/security-harden-deployments/oidc-in-azure):
-1. Create an Entra ID application and service principal for Github (this amounts to Github being a contributor to your Azure account);
-2. Add federated credentials for the Entra ID application (set up login information that your Github workflows can use in an automated way during deployment);
-3. Create Github secrets for storing the Azure configuration
-
->[!TIP] 
-> Remember to specify on -> push -> path if you have everything in one repository like I do! I had something like 20+ unsuccessful commits before figuring this out... 
-
-## Step 15: CI/CD (Front end)
-Same idea as above, except this time, instead of packing a .zip file and uploading to my Azure Function app, I set up a workflow to upload to blob storage. [Azure's docs](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-static-site-github-actions?tabs=openid) won here! I pretty much followed the instructions step-by-step. I discovered that actually finding the information for the variables was the toughest part here.
-
->[!TIP]
-> Keep a running list of what you named everything to make your life easier. I spent an hour trying to find my Front Door endpoint name. Don't be like me.
-
->[!TIP]
-> In your yml for uploading to blob storage, I *highly* recommend adding a --nowait parameter to your endpoint purge az cli command. For some reason the purge command hangs for a very long time for me (30+ minutes).
-
-## Step 16: Blog Post
-Does this count? I have some thoughts to share about some of the steps that people new to Azure may find helpful - I'll try to flesh them out and add them to some blog sites, maybe hashnode.
-
+- Continue to deepen knowledge of Azure services (e.g., App Services, Kubernetes)  
+- Explore Terraform and multi-cloud IaC
+- Continue building integrated projects combining backend, frontend, and cloud skills

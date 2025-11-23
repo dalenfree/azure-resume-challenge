@@ -13,8 +13,8 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
     logging.info("Processing HTTP request for visitor counter...")
 
     # === 1. Initialize Cosmos DB client ===
-    cosmos_url = os.getenv("COSMOS_DB_URL")  # e.g., "https://rccdbaccount.documents.azure.com:443/"
-    cosmos_key = os.getenv("COSMOS_DB_KEY")  # your primary key from Azure Cosmos DB Keys tab
+    cosmos_url = os.getenv("COSMOS_DB_URL")  
+    cosmos_key = os.getenv("COSMOS_DB_KEY")  
 
     if not cosmos_url or not cosmos_key:
         return func.HttpResponse(
