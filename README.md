@@ -16,7 +16,7 @@ ChatGPT recommended I add the tags above, aren't they neat?
 
 ## About Me
 
-I come from a *recreationally technical* background — the kid who installed Linux for fun, loved the command line, and inevitably became family tech support. Professionally, I’ve been in tech sales, slowly inching closer to the development and cloud side through RFPs, risk assessments, and compliance work.
+I come from a *recreationally technical* background — the kid who ins talled Linux for fun, loved the command line, and inevitably became family tech support. Professionally, I’ve been in tech sales, slowly inching closer to the development and cloud side through RFPs, risk assessments, and compliance work.
 
 This project was my first structured leap into Azure and hands-on cloud engineering. My goal wasn’t just to complete the Cloud Resume Challenge — it was to see whether I actually enjoyed “getting into the weeds.”
 
@@ -24,6 +24,7 @@ This project was my first structured leap into Azure and hands-on cloud engineer
 
 
 ## Architecture Overview
+```mermaid
 flowchart TB
     User((User Browser))
       -->|HTTPS Request| FrontDoor[Azure Front Door]
@@ -32,7 +33,7 @@ flowchart TB
     FrontDoor -->|API Request| FunctionApp[Azure Function App (Python)]
 
     FunctionApp -->|CRUD Ops| CosmosDB[(Azure Cosmos DB <br/> NoSQL Container)]
-
+```
 ---
 ## The Journal, Step by Step
 A chronological walkthrough of what I built, what I broke, and what I learned.
