@@ -209,11 +209,7 @@ This project gave me:
 
 ## Next Steps
 - Learn Azure App Services / Container Apps
-
 - Continue building Terraform workflows
-
 - Integrate more security concepts (managed identities, private networking)
-
 - Build an IoT + Function App + Cosmos DB project?
-
 - Improve frontend skills for more interactive projects
