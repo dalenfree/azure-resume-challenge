@@ -29,10 +29,11 @@ flowchart TB
     User((User Browser))
       -->|HTTPS Request| FrontDoor[Azure Front Door]
 
-    FrontDoor -->|Static Content| StaticSite[Azure Storage<br/>Static Website]
-    FrontDoor -->|API Request| FunctionApp[Azure Function App (Python)]
+    FrontDoor -->|Static Content| StaticSite[Azure Storage Site]
+    FrontDoor -->|API Request| FunctionApp[Azure Function App]
 
-    FunctionApp -->|CRUD Ops| CosmosDB[(Azure Cosmos DB<br/>NoSQL Container)]
+    FunctionApp -->|CRUD Ops| CosmosDB[(Azure Cosmos DB NoSQL Container)]
+
 ```
 ---
 ## The Journal, Step by Step
