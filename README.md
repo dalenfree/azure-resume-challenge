@@ -24,6 +24,8 @@ This project was my first structured leap into Azure and hands-on cloud engineer
 
 
 ## Architecture Overview
+Look at this neat Mermaid diagram ChatGPT taught me how to make to visualize the project!
+
 ```mermaid
 flowchart TB
     User((User Browser))
