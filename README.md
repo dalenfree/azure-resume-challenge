@@ -54,10 +54,10 @@ I “cheated” a bit. I’ve brushed against HTML before, but this time I lever
 If you aren't a front-end dev, AI or templates can help you save you time here.
 
 ### Step 3: CSS
-Same as Step 2 — ChatGPT helped me understand structure, responsiveness, and styling patterns enough to produce a clean static page.
+Same as Step 2. ChatGPT helped me understand structure, responsiveness, and styling patterns enough to produce a clean static page.
 
 ### Step 4: Static Website
-Dead simple: upload `index.html` and `style.css`, enable Static Website.
+This was pretty simple. Upload `index.html` and `style.css`, enable Static Website.
 > [!TIP]
 *Make sure your index document name matches your actual HTML file name.*
 I uploaded `index.html` the first time and couldn’t figure out why nothing worked.
@@ -67,19 +67,15 @@ This is where the adventure began.
 
 The documentation recommended Azure CDN, but CDN Classic is deprecated. Front Door Standard/Premium is now the only method allowed, as far as I could tell.
 
-I also learned the Azure free trial does not support Front Door.
+I also learned the Azure free trial does not support Front Door, but my new Azure account did come with $200 in credits, so I was able to implement it with minimal cost. 
 
-Cue 30 minutes of subscription spelunking.
-
-Then I remembered: I had $200 in free credits.
-
-Crisis averted!
+This also prompted me to learn about setting up cost alerts in Azure as well.
 
 > [!IMPORTANT]
 Front Door is **not cheap** (~$50 CAD/month). Plan to delete resources after testing or use a sandbox subscription. This becomes much easier once IaC is set up.
 
 ### Step 6: DNS
-This took longer than I’d like to admit. I initially pointed my domain to the static website endpoint… and nothing.
+This took longer than I’d like to admit. I initially pointed my domain to the static website endpoint, but it didn't work properly.
 
 Eventually I realized the Front Door endpoint is what actually matters.
 
@@ -116,12 +112,10 @@ Here’s the JSON seed data I used:
 ### Step 9: API
 I chose Python, consumption plan, HTTP trigger.
 
-But then Azure told me I must develop this via VSCode or GitHub — no inline editor allowed.
-
-**Side Quest:** Learn VSCode + Git + Azure integration in one afternoon.
+But then Azure told me I must develop this via VSCode or GitHub — no inline editor allowed. This led me to learn how to use VSCode + Git + Azure integrations.
 
 > [!NOTE]
-This ended up being one of the most useful skills I gained during the entire challenge.
+Combining VSCode with the other resources ended up being one of the most useful skills I gained during the entire challenge.
 
 ### Step 10: Python
 This was the hardest step.
@@ -137,16 +131,13 @@ I had to:
 
 My first version was rough but functional, and the sense of victory was very real. I admittedly had a great deal of help from ChatGPT on this step.
 
-**Side Quest:** Move to CLI deployment
-VSCode deployments hung indefinitely (perhaps an issue with VSCode on Linux/Debian?), so I switched entirely to Azure CLI. Much faster. 
+**Side Quest:** I noticed that VSCode deployments hung indefinitely (perhaps an issue with VSCode on Linux/Debian?), so I switched entirely to Azure CLI. Much faster. 
 
 > [!TIP]
 Deployment via `az functionapp deployment source config-zip` is rock solid and predictable.
 
 ### Step 11: Testing
-Learned mocking, patching, and unit test structure in Python.
-
-ChatGPT was… extremely helpful here.
+Learned mocking, patching, and unit test structure in Python, with significant help from ChatGPT.
 
 ### Step 12: Infrasructure as Code
 This was my “aha” moment. After many manual deployments, IaC suddenly made so much sense.
@@ -156,7 +147,7 @@ This was my “aha” moment. After many manual deployments, IaC suddenly made s
 - Switched to Bicep
 - Then later rewrote everything in Terraform
 
-Both repos available here:
+Bicep and Terraform repos available here:
 
 **Bicep:** https://github.com/dalenfree/azure-resume-challenge-bicep
 
